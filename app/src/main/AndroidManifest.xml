@@ -9,23 +9,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
+        <!-- LauncherActivity -->
         <activity
             android:name=".activity.LauncherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity -->
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
