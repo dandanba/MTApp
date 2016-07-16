@@ -1,9 +1,13 @@
 package cn.maitian.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class LauncherActivity extends AppCompatActivity {
+import cn.maitian.base.BaseActivity;
+
+/**
+ * launcher activity
+ */
+public class LauncherActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
