@@ -1,20 +1,16 @@
 package cn.maitian.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
+import cn.maitian.R;
 import cn.maitian.base.BaseActivity;
 
-/**
- * launcher activity
- */
-public class LauncherActivity extends BaseActivity {
-
+public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        startActivity(new Intent(this, MainActivity.class));
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
-
 }
