@@ -1,24 +1,51 @@
 apply plugin: 'com.android.application'
+// [Error:Could not find property 'options' on task ':app:compileOfficalDebugJavaWithJack'.](http://blog.csdn.net/yuhanghate/article/details/51544201)
+apply plugin: 'android-apt'//butterknife
+apply plugin: 'me.tatarka.retrolambda'//retrolambda
 
 android {
     signingConfigs {
         maitian {
-            keyAlias 'maitian.keystore'
-            keyPassword 'android'
-            storeFile file('../keystore/maitian.keystore')
-            storePassword 'android'
+            keyAlias KEYALIAS
+            keyPassword KEYPASSWORD
+            storeFile file(STOREFILE)
+            storePassword KEYPASSWORD
         }
     }
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion COMPILESDKVERSION as int
+    buildToolsVersion BUILDTOOLSVERSION
     defaultConfig {
         applicationId "cn.maitian"
-        minSdkVersion 18
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion MINSDKVERSION as int
+        targetSdkVersion TARGETSDKVERSION as int
+        versionCode VERSIONCODE as int
+        versionName VERSIONNAME
+//        [Error:Jack is required to support javava 8 language features. Either enable Jack or remove sourceCompatibility JavaVersion.VERSION_1_8.](http://blog.csdn.net/yuhanghate/article/details/51490214)
+//        jackOptions {
+//            enabled true
+//        }
+
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "offical"]
+    }
+    // [使用Gradle构建Android应用的渠道包](http://www.cnblogs.com/shanpow/p/4097320.html)
+    // [Android Studio 多渠道打包、自动版本号及 gradlew 命令的基本使用](http://www.jianshu.com/p/44d40f8e67c9)
+    // [Android渠道打包工具](https://github.com/mcxiaoke/gradle-packer-plugin)
+    // [Jenkins+Gradle实现android开发持续集成、打包](http://my.oschina.net/uboluo/blog/157483)
+    productFlavors {
+        offical {}
+    }
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.maitian
+        }
         release {
             minifyEnabled true
             zipAlignEnabled true
@@ -28,10 +55,20 @@ android {
             signingConfig signingConfigs.maitian
         }
     }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0'
+    testCompile "junit:junit:$JUNIT"
+    compile "com.android.support:appcompat-v7:$APPCOMPAT_V7"
+    compile "org.greenrobot:eventbus:$EVENTBUS"
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE"
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE"
 }
