@@ -3,6 +3,8 @@ package cn.maitian.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.orhanobut.logger.Logger;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -11,10 +13,13 @@ import cn.maitian.event.BaseEvent;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private static final String TAG = BaseActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        Logger.i("%1$s,onCreate", TAG);
     }
 
     @Override
@@ -30,6 +35,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Logger.i("%1$s,onDestroy", TAG);
+        BaseApplication.getBaseApplication().getmRefWatcher().watch(this);
         EventBus.getDefault().unregister(this);
     }
 

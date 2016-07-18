@@ -92,3 +92,27 @@
 
 # For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your ProGuard config:
 # -printmapping mapping.txt
+
+# Proguard configuration for Jackson 2.x (fasterxml package instead of codehaus package)
+
+-keep class com.fasterxml.jackson.databind.ObjectMapper {
+    public <methods>;
+    protected <methods>;
+}
+-keep class com.fasterxml.jackson.databind.ObjectWriter {
+    public ** writeValueAsString(**);
+}
+
+#glide https://github.com/bumptech/glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+# retrofit2 http://square.github.io/retrofit/#PROGUARD
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions

@@ -1,5 +1,7 @@
 package cn.maitian.app;
 
+import cn.maitian.base.BaseApplication;
+
 /**
  * Created by geng on 2016/7/16.
  */
