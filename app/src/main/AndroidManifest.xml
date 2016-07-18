@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.maitian">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".app.MTApplication"
         android:allowBackup="true"
@@ -10,9 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- multi channel -->
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
+        <!-- fabric api key -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9fbcf46a17338c0ed7859bc5de7a96c85313f88d" />
 
         <!-- LauncherActivity -->
         <activity
@@ -31,5 +37,6 @@
             android:screenOrientation="portrait" />
 
     </application>
+
 
 </manifest>
