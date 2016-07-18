@@ -3,13 +3,12 @@ package cn.maitian.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.orhanobut.logger.Logger;
-
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import cn.maitian.event.BaseEvent;
+import cn.maitian.util.EventUtil;
+import cn.maitian.util.LogUtil;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -18,8 +17,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-        Logger.i("%1$s,onCreate", TAG);
+        EventUtil.register(this);
+        LogUtil.i("%1$s,onCreate", TAG);
     }
 
     @Override
@@ -35,9 +34,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Logger.i("%1$s,onDestroy", TAG);
+        LogUtil.i("%1$s,onDestroy", TAG);
         BaseApplication.getBaseApplication().getRefWatcher().watch(this);
-        EventBus.getDefault().unregister(this);
+        EventUtil.unregister(this);
     }
 
     // This method will be called when a BaseEvent is posted (in the UI thread for Toast)
@@ -46,6 +45,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void postEvent(Object event) {
-        EventBus.getDefault().post(event);
+        EventUtil.postEvent(event);
     }
 }
