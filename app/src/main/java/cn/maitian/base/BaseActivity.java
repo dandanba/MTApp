@@ -8,6 +8,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import cn.maitian.event.BaseEvent;
 import cn.maitian.util.EventUtil;
+import cn.maitian.util.LogHandler;
 import cn.maitian.util.LogUtil;
 
 public class BaseActivity extends AppCompatActivity {

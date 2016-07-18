@@ -1,9 +1,7 @@
-package cn.maitian.base;
+package cn.maitian.util;
 
 import android.os.Handler;
 import android.os.Message;
-
-import cn.maitian.util.LogUtil;
 
 /**
  * Created by geng on 2016/7/18.
