@@ -63,7 +63,6 @@
 }
 
 ## Retrolambda specific rules ##
-
 # as per official recommendation: https://github.com/evant/gradle-retrolambda#proguard
 -dontwarn java.lang.invoke.*
 
@@ -80,27 +79,29 @@
     @butterknife.* <methods>;
 }
 
-# https://github.com/krschultz/android-proguard-snippets/blob/master/libraries/proguard-crashlytics-2.pro
-# Crashlytics 2.+
+#https://docs.fabric.io/android/crashlytics/dex-and-proguard.html
+#We’ve made it simple to set up ProGuard or DexGuard in your app and receive deobfuscated crash reports. First of all, Fabric uses annotations internally, so add the following line to your configuration file:
+-keepattributes *Annotation*
+#Next, in order to provide the most meaningful crash reports, add the following line to your configuration file:
 
--keep class com.crashlytics.** { *; }
--keep class com.crashlytics.android.**
--keepattributes SourceFile, LineNumberTable, *Annotation*
+-keepattributes SourceFile,LineNumberTable
+#Crashlytics will still function without this rule, but your crash reports will not include proper file names or line numbers.
+#If you are using custom exceptions, add this line so that custom exception types are skipped during obfuscation:
 
-# If you are using custom exceptions, add this line so that custom exception types are skipped during obfuscation:
 -keep public class * extends java.lang.Exception
+#For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your configuration file, or we won’t be able to automatically upload your mapping file:
+#-printmapping mapping.txt
 
-# For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your ProGuard config:
-# -printmapping mapping.txt
-
-# Proguard configuration for Jackson 2.x (fasterxml package instead of codehaus package)
-
--keep class com.fasterxml.jackson.databind.ObjectMapper {
-    public <methods>;
-    protected <methods>;
-}
--keep class com.fasterxml.jackson.databind.ObjectWriter {
-    public ** writeValueAsString(**);
+# jackson
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class org.codehaus.** { *; }
+-keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
+ public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
+-keep public class your.class.** {
+  public void set*(***);
+  public *** get*();
 }
 
 #glide https://github.com/bumptech/glide
@@ -109,15 +110,26 @@
   **[] $VALUES;
   public *;
 }
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+#java.io.IOException: proguard.ParseException: Unknown option '-keepresourcexmlelements' in line 112 of file 'D:\Android\MTApp\app\proguard-rules.pro'
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
-# retrofit2 http://square.github.io/retrofit/#PROGUARD
+# Retrofit 2.X
+## https://square.github.io/retrofit/ ##
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
 
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
 # common https://github.com/Trinea/android-common
 -keep class cn.trinea.android.** { *; }
 -keepclassmembers class cn.trinea.android.** { *; }
 -dontwarn cn.trinea.android.**
+
+# LeakCanary
+-keep class org.eclipse.mat.** { *; }
+-keep class com.squareup.leakcanary.** { *; }
+
