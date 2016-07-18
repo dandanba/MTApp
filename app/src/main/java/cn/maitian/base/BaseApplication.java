@@ -21,7 +21,7 @@ public class BaseApplication extends Application {
         return sBaseApplication;
     }
 
-    public RefWatcher getmRefWatcher() {
+    public RefWatcher getRefWatcher() {
         return mRefWatcher;
     }
 

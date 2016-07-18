@@ -36,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Logger.i("%1$s,onDestroy", TAG);
-        BaseApplication.getBaseApplication().getmRefWatcher().watch(this);
+        BaseApplication.getBaseApplication().getRefWatcher().watch(this);
         EventBus.getDefault().unregister(this);
     }
 
