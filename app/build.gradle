@@ -114,8 +114,11 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY"
     // logger
     compile "com.orhanobut:logger:$ORHANOBUTLOGGER"
+    // common
+    compile "cn.trinea.android.common:trinea-android-common:$COMMON"
     // crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
         transitive = true;
     }
+    compile 'com.android.support:support-v4:24.0.0'
 }

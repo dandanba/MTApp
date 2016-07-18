@@ -1,7 +1,8 @@
 package cn.maitian.base;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -10,28 +11,29 @@ import cn.maitian.event.BaseEvent;
 import cn.maitian.util.EventUtil;
 import cn.maitian.util.LogUtil;
 
-public class BaseActivity extends AppCompatActivity {
-
-    private static final String TAG = BaseActivity.class.getSimpleName();
-
-    private LogHandler mLogHandler = new LogHandler();
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class BaseFragment extends Fragment {
+    private static final String TAG = BaseFragment.class.getSimpleName();
+    private BaseActivity mBaseActivity;
 
     public LogHandler getHandler() {
-        return mLogHandler;
+        return mBaseActivity.getHandler();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mBaseActivity = (BaseActivity) context;
         EventUtil.register(this);
-        LogUtil.i("%1$s,onCreate", TAG);
+        LogUtil.i("%1$s,onAttach", TAG);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LogUtil.i("%1$s,onDestroy", TAG);
-        BaseApplication.getBaseApplication().getRefWatcher().watch(this);
+    public void onDetach() {
+        super.onDetach();
+        LogUtil.i("%1$s,onDetach", TAG);
         EventUtil.unregister(this);
     }
 
