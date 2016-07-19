@@ -16,12 +16,7 @@ import cn.maitian.util.LogUtil;
 import cn.trinea.android.common.util.ToastUtils;
 
 public class MainActivity extends BaseActivity {
-    final static String JSON = "{\n" +
-            "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
-            "  \"gender\" : \"MALE\",\n" +
-            "  \"verified\" : false,\n" +
-            "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
-            "}";
+
     @BindView(R.id.button)
     Button mButton;
     @BindView(R.id.imageView)
@@ -43,6 +38,12 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.button)
     public void onClick(View view) {
+        final String JSON = "{\n" +
+                "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
+                "  \"gender\" : \"MALE\",\n" +
+                "  \"verified\" : false,\n" +
+                "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
+                "}";
         User user = JacksonUtil.readValue(JSON, User.class);
         LogUtil.i(user.toString());
 
