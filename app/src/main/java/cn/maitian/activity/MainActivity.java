@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView() {
-        loadImage("http://www.fancyenglish.com/country/Taj%20Mahal/india_taj_mahal.jpg", mImageView);
+        loadTransformationImage("http://www.fancyenglish.com/country/Taj%20Mahal/india_taj_mahal.jpg", mImageView, 2);
         mImageView.setOnClickListener(view -> ToastUtils.show(this, "image click"));
     }
 

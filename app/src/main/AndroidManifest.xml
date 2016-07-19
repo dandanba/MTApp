@@ -15,6 +15,9 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
+        <meta-data
+            android:name="cn.maitian.util.GlideConfiguration"
+            android:value="GlideModule" />
         <!-- fabric api key -->
         <meta-data
             android:name="io.fabric.ApiKey"

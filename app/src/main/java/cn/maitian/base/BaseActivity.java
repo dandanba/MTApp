@@ -52,6 +52,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         GlideUtil.loadImage(this, url, imageView);
     }
 
+    public void loadTransformationImage(String url, ImageView imageView, int transformation) {
+        GlideUtil.loadTransformationImage(this, url, transformation, imageView);
+    }
+
     public void initContentViewById(int contentViewId) {
         setContentView(contentViewId);
         ButterKnife.bind(this);
