@@ -66,18 +66,15 @@
 # as per official recommendation: https://github.com/evant/gradle-retrolambda#proguard
 -dontwarn java.lang.invoke.*
 
-# ButterKnife 7
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
+# https://raw.githubusercontent.com/JakeWharton/butterknife/master/butterknife/proguard-rules.txt
+# Retain generated class which implement ViewBinder.
+-keep public class * implements butterknife.internal.ViewBinder { public <init>(); }
 
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
+# Prevent obfuscation of types which use ButterKnife annotations since the simple name
+# is used to reflectively look up the generated ViewBinder.
+-keep class butterknife.*
+-keepclasseswithmembernames class * { @butterknife.* <methods>; }
+-keepclasseswithmembernames class * { @butterknife.* <fields>; }
 
 #https://docs.fabric.io/android/crashlytics/dex-and-proguard.html
 #We’ve made it simple to set up ProGuard or DexGuard in your app and receive deobfuscated crash reports. First of all, Fabric uses annotations internally, so add the following line to your configuration file:
@@ -99,7 +96,7 @@
 -keep class org.codehaus.** { *; }
 -keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
  public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
--keep public class your.class.** {
+-keep public class cn.maitian.model.** {
   public void set*(***);
   public *** get*();
 }

@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.ButterKnife;
 import cn.maitian.event.BaseEvent;
 import cn.maitian.util.EventUtil;
 import cn.maitian.util.LogHandler;
 import cn.maitian.util.LogUtil;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -44,4 +45,10 @@ public class BaseActivity extends AppCompatActivity {
     public void postEvent(Object event) {
         EventUtil.postEvent(event);
     }
+
+    public void initContentViewById(int contentViewId) {
+        setContentView(contentViewId);
+        ButterKnife.bind(this);
+    }
+
 }

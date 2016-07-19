@@ -84,7 +84,9 @@ dependencies {
     testCompile "junit:junit:$JUNIT"
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$APPCOMPAT_V7"
+    // eventbus
     compile "org.greenrobot:eventbus:$EVENTBUS"
+    // butterknife
     compile "com.jakewharton:butterknife:$BUTTERKNIFE"
     apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE"
     // jackson
