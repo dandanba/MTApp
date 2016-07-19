@@ -3,12 +3,14 @@ package cn.maitian.base;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.widget.ImageView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import cn.maitian.event.BaseEvent;
 import cn.maitian.util.EventUtil;
+import cn.maitian.util.GlideUtil;
 import cn.maitian.util.LogHandler;
 import cn.maitian.util.LogUtil;
 
@@ -46,4 +48,9 @@ public class BaseFragment extends Fragment {
     public void postEvent(Object event) {
         EventUtil.postEvent(event);
     }
+
+    public void loadImage(String url, ImageView imageView) {
+        GlideUtil.loadImage(this, url, imageView);
+    }
+
 }

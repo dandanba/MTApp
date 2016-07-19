@@ -16,7 +16,7 @@ import cn.maitian.util.LogUtil;
 import cn.trinea.android.common.util.ToastUtils;
 
 public class MainActivity extends BaseActivity {
-    final String json = "{\n" +
+    final static String JSON = "{\n" +
             "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
             "  \"gender\" : \"MALE\",\n" +
             "  \"verified\" : false,\n" +
@@ -37,12 +37,13 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView() {
+        loadImage("http://www.fancyenglish.com/country/Taj%20Mahal/india_taj_mahal.jpg", mImageView);
         mImageView.setOnClickListener(view -> ToastUtils.show(this, "image click"));
     }
 
     @OnClick(R.id.button)
     public void onClick(View view) {
-        User user = JacksonUtil.readValue(json, User.class);
+        User user = JacksonUtil.readValue(JSON, User.class);
         LogUtil.i(user.toString());
 
         final String json = JacksonUtil.writeValueAsString(user);
