@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/NormalTheme">
 
         <!-- multi channel -->
         <meta-data
@@ -41,6 +41,10 @@
         <!-- MainActivity -->
         <activity
             android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <!-- AppActivity -->
+        <activity
+            android:name=".activity.AppActivity"
             android:screenOrientation="portrait" />
     </application>
 

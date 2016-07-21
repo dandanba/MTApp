@@ -9,10 +9,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.maitian.R;
-import cn.maitian.api.bean.UserBean;
 import cn.maitian.base.BaseActivity;
-import cn.maitian.util.JacksonUtil;
-import cn.maitian.util.LogUtil;
+import cn.maitian.util.ClickUtil;
+import cn.maitian.util.IntentUtil;
 import cn.trinea.android.common.util.ToastUtils;
 
 public class MainActivity extends BaseActivity {
@@ -38,17 +37,20 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.button)
     public void onClick(View view) {
-        final String JSON = "{\n" +
-                "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
-                "  \"gender\" : \"MALE\",\n" +
-                "  \"verified\" : false,\n" +
-                "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
-                "}";
-        UserBean user = JacksonUtil.readValue(JSON, UserBean.class);
-        LogUtil.i(user.toString());
-
-        final String json = JacksonUtil.writeValueAsString(user);
-        LogUtil.json(json);
+//        final String JSON = "{\n" +
+//                "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
+//                "  \"gender\" : \"MALE\",\n" +
+//                "  \"verified\" : false,\n" +
+//                "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
+//                "}";
+//        UserBean user = JacksonUtil.readValue(JSON, UserBean.class);
+//        LogUtil.i(user.toString());
+//
+//        final String json = JacksonUtil.writeValueAsString(user);
+//        LogUtil.json(json);
+        if (ClickUtil.fastClick(this)) {
+            startActivity(IntentUtil.generateIntent(this, AppActivity.class));
+        }
 
     }
 
