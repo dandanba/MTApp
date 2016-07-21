@@ -5,7 +5,7 @@ import cn.maitian.api.base.BaseResponse;
 /**
  * Created by geng on 2016/7/21.
  */
-public class Response<D> extends BaseResponse {
+public class DataResponse<D> extends BaseResponse {
     public D data;
 
     public D getData() {

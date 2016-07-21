@@ -13,5 +13,5 @@ import rx.Observable;
  */
 public interface ApiService {
     @POST("api/borrow/getborrowlistbyrobot")
-    Observable<Response<UserBean>> getborrowlistbyrobot(@FieldMap Map<String, String> map, @Header("X-FANCY-TIMESTAMP") String timestamp, @Header("X-FANCY-SIGN") String sign);
+    Observable<DataResponse<UserBean>> getborrowlistbyrobot(@FieldMap Map<String, String> map, @Header("X-FANCY-TIMESTAMP") String timestamp, @Header("X-FANCY-SIGN") String sign);
 }
