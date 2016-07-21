@@ -2,15 +2,14 @@ package cn.maitian.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
-import cn.maitian.event.BaseEvent;
+import cn.maitian.event.ViewEvent;
 import cn.maitian.util.EventUtil;
-import cn.maitian.util.GlideUtil;
 import cn.maitian.util.LogHandler;
 import cn.maitian.util.LogUtil;
 
@@ -39,23 +38,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         EventUtil.unregister(this);
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(BaseEvent event) {
-        final String tag = event.getTag();
+    public void onViewEvent(ViewEvent event) {
         final Object sender = event.getSender();
+        final String tag = event.getTag();
+        LogUtil.i("%1$s,%2$s,onViewEvent", sender, tag);
+        onClick(sender, tag, event.getView());
     }
 
-    public void postEvent(Object event) {
-        EventUtil.postEvent(event);
-    }
-
-    public void loadImage(String url, ImageView imageView) {
-        GlideUtil.loadImage(this, url, imageView);
-    }
-
-    public void loadTransformationImage(String url, ImageView imageView, int transformation) {
-        GlideUtil.loadTransformationImage(this, url, transformation, imageView);
+    public void onClick(Object sender, String tag, View view) {
     }
 
     public void initContentViewById(int contentViewId) {
