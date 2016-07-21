@@ -12,6 +12,7 @@ import cn.maitian.R;
 import cn.maitian.base.BaseActivity;
 import cn.maitian.util.ClickUtil;
 import cn.maitian.util.LogUtil;
+import cn.trinea.android.common.util.ToastUtils;
 
 public class MainActivity extends BaseActivity {
     public final static String TAG = MainActivity.class.getSimpleName();
@@ -33,6 +34,8 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         if (ClickUtil.doubleHit(this)) {
             super.onBackPressed();
+        } else {
+            ToastUtils.show(this, "再按一次退出程序");
         }
     }
 
