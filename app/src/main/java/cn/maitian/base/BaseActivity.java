@@ -39,9 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         EventUtil.unregister(this);
     }
 
-    // This method will be called when a BaseEvent is posted (in the UI thread for Toast)
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvent event) {
+        final String tag = event.getTag();
+        final Object sender = event.getSender();
     }
 
     public void postEvent(Object event) {
@@ -60,5 +62,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(contentViewId);
         ButterKnife.bind(this);
     }
+
 
 }

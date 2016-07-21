@@ -6,15 +6,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.maitian.R;
 import cn.maitian.base.BaseActivity;
+import cn.maitian.event.ViewEvent;
 import cn.maitian.util.ClickUtil;
-import cn.maitian.util.IntentUtil;
+import cn.maitian.util.LogUtil;
 import cn.trinea.android.common.util.ToastUtils;
 
 public class MainActivity extends BaseActivity {
+    public final static String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.button)
     Button mButton;
@@ -30,28 +35,33 @@ public class MainActivity extends BaseActivity {
         initView();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (ClickUtil.doubleHit(this)) {
+            super.onBackPressed();
+        }
+    }
+
     private void initView() {
         loadTransformationImage("http://www.fancyenglish.com/country/Taj%20Mahal/india_taj_mahal.jpg", mImageView, 2);
         mImageView.setOnClickListener(view -> ToastUtils.show(this, "image click"));
     }
 
     @OnClick(R.id.button)
-    public void onClick(View view) {
-//        final String JSON = "{\n" +
-//                "  \"name\" : { \"first\" : \"Joe\", \"last\" : \"Sixpack\" },\n" +
-//                "  \"gender\" : \"MALE\",\n" +
-//                "  \"verified\" : false,\n" +
-//                "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
-//                "}";
-//        UserBean user = JacksonUtil.readValue(JSON, UserBean.class);
-//        LogUtil.i(user.toString());
-//
-//        final String json = JacksonUtil.writeValueAsString(user);
-//        LogUtil.json(json);
-        if (ClickUtil.fastClick(this)) {
-            startActivity(IntentUtil.generateIntent(this, AppActivity.class));
-        }
-
+    public void onButtonsClick(View view) {
+        ClickUtil.onClick(this, TAG, view);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ViewEvent event) {
+        final String tag = event.getTag();
+        if (TAG.equals(tag)) {//
+            final View view = event.getView();
+            onClick(view);
+        }
+    }
+
+    public void onClick(View view) {
+        LogUtil.i("%1$s, onClick", TAG);
+    }
 }

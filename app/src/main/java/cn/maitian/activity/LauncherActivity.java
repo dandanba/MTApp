@@ -3,9 +3,7 @@ package cn.maitian.activity;
 import android.os.Bundle;
 
 import cn.maitian.base.BaseActivity;
-import cn.maitian.event.BaseEvent;
 import cn.maitian.util.IntentUtil;
-import cn.maitian.util.LogUtil;
 
 /**
  * launcher activity
@@ -19,9 +17,4 @@ public class LauncherActivity extends BaseActivity {
         startActivity(IntentUtil.generateIntent(this, MainActivity.class));
     }
 
-    @Override
-    public void onEvent(BaseEvent event) {
-        super.onEvent(event);
-        LogUtil.i("%1$s,onEvent", TAG);
-    }
 }
