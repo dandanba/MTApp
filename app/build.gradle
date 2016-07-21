@@ -36,11 +36,12 @@ android {
         targetSdkVersion TARGETSDKVERSION as int
         versionCode VERSIONCODE as int
         versionName VERSIONNAME
-//        [Error:Jack is required to support javava 8 language features. Either enable Jack or remove sourceCompatibility JavaVersion.VERSION_1_8.](http://blog.csdn.net/yuhanghate/article/details/51490214)
-//        jackOptions {
-//            enabled true
-//        }
-
+        // [Error:Jack is required to support javava 8 language features. Either enable Jack or remove sourceCompatibility JavaVersion.VERSION_1_8.](http://blog.csdn.net/yuhanghate/article/details/51490214)
+        // jackOptions {
+        //    enabled true
+        // }
+        // [Enabling multidex support.](http://blog.csdn.net/zhixuan322145/article/details/51277839)
+        multiDexEnabled true
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "offical"]
     }
     // [使用Gradle构建Android应用的渠道包](http://www.cnblogs.com/shanpow/p/4097320.html)
@@ -61,6 +62,8 @@ android {
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.maitian
+            // buildConfigField
+            buildConfigField "boolean", "DEBUG_URL", "true"
         }
         release {
             minifyEnabled true
@@ -69,6 +72,8 @@ android {
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.maitian
+            // buildConfigField
+            buildConfigField "boolean", "DEBUG_URL", "false"
         }
     }
     dexOptions {
@@ -83,6 +88,9 @@ android {
 dependencies {
     testCompile "junit:junit:$JUNIT"
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    // multidex
+    compile "com.android.support:multidex:$MULTIDEX"
+    // appcompat
     compile "com.android.support:appcompat-v7:$APPCOMPAT_V7"
     // eventbus
     compile "org.greenrobot:eventbus:$EVENTBUS"

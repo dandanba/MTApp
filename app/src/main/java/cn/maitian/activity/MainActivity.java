@@ -9,8 +9,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.maitian.R;
+import cn.maitian.api.bean.UserBean;
 import cn.maitian.base.BaseActivity;
-import cn.maitian.model.User;
 import cn.maitian.util.JacksonUtil;
 import cn.maitian.util.LogUtil;
 import cn.trinea.android.common.util.ToastUtils;
@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
                 "  \"verified\" : false,\n" +
                 "  \"userImage\" : \"Rm9vYmFyIQ==\"\n" +
                 "}";
-        User user = JacksonUtil.readValue(JSON, User.class);
+        UserBean user = JacksonUtil.readValue(JSON, UserBean.class);
         LogUtil.i(user.toString());
 
         final String json = JacksonUtil.writeValueAsString(user);

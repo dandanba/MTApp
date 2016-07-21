@@ -29,4 +29,8 @@ public class JacksonUtil {
         }
         return null;
     }
+
+    public static ObjectMapper getObjectMapper() {
+        return mapper;
+    }
 }
