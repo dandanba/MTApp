@@ -29,12 +29,12 @@ public class ClickUtil {
     private static boolean timesHit(Context context, long[] hits) {
         System.arraycopy(hits, 1, hits, 0, hits.length - 1);
         hits[hits.length - 1] = SystemClock.uptimeMillis();
-        return hits[0] >= (SystemClock.uptimeMillis() - 500);
+        return hits[0] >= (SystemClock.uptimeMillis() - 10000);
     }
 
     public static void onClick(Object sender, String tag, View view) {
         RxView.clicks(view)
-                .throttleFirst(100, TimeUnit.MILLISECONDS)
+                .throttleFirst(2, TimeUnit.SECONDS)
                 .subscribe(aVoid -> {
                     final ViewEvent event = new ViewEvent(view);
                     event.setTag(tag);
