@@ -1,6 +1,7 @@
 package cn.maitian.activity;
 
 import android.os.Bundle;
+import android.os.Message;
 
 import cn.maitian.base.BaseActivity;
 import cn.maitian.util.IntentUtil;
@@ -14,7 +15,21 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(IntentUtil.generateIntent(this, MainActivity.class));
+        getHandler().sendEmptyMessageDelayed(1, 1000);
+    }
+
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what) {
+            case 1:
+                getHandler().removeCallbacksAndMessages();
+                startActivity(IntentUtil.generateIntent(this, MainActivity.class));
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
 }

@@ -132,4 +132,10 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
         transitive = true;
     }
+    // SwipeToLoadLayout
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.3'
+    // FragmentNavigator
+    compile 'com.github.Aspsine:FragmentNavigator:1.0.2'
+    // BaseRecyclerViewAdapterHelper
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.3'
 }

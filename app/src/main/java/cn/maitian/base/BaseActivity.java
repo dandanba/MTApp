@@ -1,6 +1,7 @@
 package cn.maitian.base;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -17,7 +18,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    private LogHandler mLogHandler = new LogHandler();
+    private LogHandler mLogHandler = new LogHandler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseActivity.this.handleMessage(msg);
+        }
+    };
 
     public LogHandler getHandler() {
         return mLogHandler;
@@ -34,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         LogUtil.i("%1$s,onDestroy", TAG);
+        getHandler().removeCallbacksAndMessages();
         BaseApplication.getBaseApplication().getRefWatcher().watch(this);
         EventUtil.unregister(this);
     }
@@ -44,6 +53,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         final String tag = event.getTag();
         LogUtil.i("%1$s,%2$s,onViewEvent", sender, tag);
         onClick(sender, tag, event.getView());
+    }
+
+    public void handleMessage(Message msg) {
     }
 
     public void onClick(Object sender, String tag, View view) {

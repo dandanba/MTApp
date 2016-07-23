@@ -14,4 +14,8 @@ public class LogHandler extends Handler {
         super.handleMessage(msg);
         LogUtil.i("handleMessage", TAG);
     }
+
+    public void removeCallbacksAndMessages() {
+        removeCallbacksAndMessages(null);
+    }
 }
