@@ -134,9 +134,9 @@
 }
 
 # common https://github.com/Trinea/android-common
--keep class cn.trinea.android.** { *; }
--keepclassmembers class cn.trinea.android.** { *; }
--dontwarn cn.trinea.android.**
+# -keep class cn.trinea.android.** { *; }
+# -keepclassmembers class cn.trinea.android.** { *; }
+# -dontwarn cn.trinea.android.**
 
 # LeakCanary
 -keep class org.eclipse.mat.** { *; }

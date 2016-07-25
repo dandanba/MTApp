@@ -114,7 +114,7 @@ dependencies {
     // logger
     compile "com.orhanobut:logger:$ORHANOBUTLOGGER"
     // common
-    compile "cn.trinea.android.common:trinea-android-common:$COMMON"
+    // compile "cn.trinea.android.common:trinea-android-common:$COMMON"
     // okhttp
     compile "com.squareup.okhttp3:okhttp:$OKHTTP"
     // rx
@@ -133,9 +133,9 @@ dependencies {
         transitive = true;
     }
     // SwipeToLoadLayout
-    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.3'
+    compile "com.github.Aspsine:SwipeToLoadLayout:$SWIPETOLOADLAYOUT"
     // FragmentNavigator
-    compile 'com.github.Aspsine:FragmentNavigator:1.0.2'
+    compile "com.github.Aspsine:FragmentNavigator:$FRAGMENTNAVIGATOR"
     // BaseRecyclerViewAdapterHelper
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.3'
+    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$BASERECYCLERVIEWADAPTERHELPER"
 }

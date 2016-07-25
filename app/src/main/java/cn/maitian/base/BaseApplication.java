@@ -18,9 +18,9 @@ import retrofit2.Retrofit;
  */
 public class BaseApplication extends MultiDexApplication {
     private static BaseApplication sBaseApplication;
+    private final Messager mMessager = new Messager();
+    private Retrofit mRetrofit;
     private RefWatcher mRefWatcher;
-    private Messager mMessager = new Messager();
-    private Retrofit mRetrofit = RetrofitUtils.getClient();
 
     public static BaseApplication getBaseApplication() {
         return sBaseApplication;
@@ -46,6 +46,7 @@ public class BaseApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         LogUtil.init();
+        mRetrofit = RetrofitUtils.initClient(this);
         mRefWatcher = LeakCanary.install(this);
         Fabric.with(this, new Crashlytics());
         sBaseApplication = this;
