@@ -38,15 +38,15 @@ public class RetrofitUtils {
         final Cache cache = new Cache(dir, 1024 * 1024 * 50);
 
         final Interceptor cacheInterceptor = chain -> {
-            Response originalResponse = chain.proceed(chain.request());
+            Response response = chain.proceed(chain.request());
             if (Network.isConnected(context)) {
                 int maxAge = 60; // read from cache for 1 minute
-                return originalResponse.newBuilder()
+                return response.newBuilder()
                         .header("Cache-Control", "public, max-age=" + maxAge)
                         .build();
             } else {
                 int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
-                return originalResponse.newBuilder()
+                return response.newBuilder()
                         .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                         .build();
             }
